@@ -10,3 +10,9 @@ adb reboot bootloader
 adb wait-for-device root
 adb install xxx.apk
 
+repo sync -c --no-tags
+repo start master --all
+repo forall -c -p "git checkout master; git branch -m aaa xxx"
+
+#delete all branch
+repo forall -c "git branch | sed -e /^*/d | xargs git branch -D"
