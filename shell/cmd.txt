@@ -1,0 +1,12 @@
+gzip -cd /proc/config.gz
+
+fastboot oem uart enable
+fastboot oem lock-state info
+fastboot erase kernel
+fastboot flash kernel kernel.img
+fastboot reboot
+
+adb reboot bootloader
+adb wait-for-device root
+adb install xxx.apk
+
