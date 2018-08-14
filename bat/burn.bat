@@ -23,3 +23,8 @@ set comport=com5
 set /p comport=please input the port:
 
 echo port=%comport% > ./%LOGFILE%
+echo %date%-%time%
+
+::sleep 1 second
+>"%temp%\sleep.vbs" echo wscript.sleep 1000
+"%temp%\sleep.vbs"
