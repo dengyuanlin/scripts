@@ -1,0 +1,2 @@
+:help mark
+:marks 显示所有标记
