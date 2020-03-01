@@ -1,0 +1,25 @@
+==================================
+                arm
+==================================
+https://www.anquanke.com/post/id/86401
+ARM指令集规律含义如下面的模板所示：-------动图演示不错
+
+MNEMONIC{S}{condition} {Rd}, Operand1, Operand2
+助记符{是否使用CPSR}{是否条件执行以及条件} {目的寄存器}, 操作符1, 操作符2
+    R13: SP
+    R14: LR
+    R15: PC
+    R16: CPSR
+    
+direction:
+【A】     <-------
+LDR{条件} 目的寄存器，<存储器地址>
+stmdb
+
+【B】     ------->
+STR{条件} 源寄存器，<存储器地址>
+ldmia
+
+stmdb和ldmia指令一般配对使用，stmdb用于将寄存器压栈，ldmia用于将寄存器弹出栈
+stmdb sp!,{r0-r12,lr}  
+含义：sp = sp - 4，先压lr，sp = lr（即将lr中的内容放入sp所指的内存地址）。sp = sp - 4，再压r12
