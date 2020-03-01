@@ -5,16 +5,27 @@ https://www.anquanke.com/post/id/86401
 ARM指令集规律含义如下面的模板所示：-------动图演示不错
 
 MNEMONIC{S}{condition} {Rd}, Operand1, Operand2
-助记符{是否使用CPSR}{是否条件执行以及条件} {目的寄存器}, 操作符1, 操作符2
+助记符{是否使用CPSR}{是否条件执行以及条件} {目的寄存器}, 操作符1, 操作符2 （即大部分顺序是从右往左<-------）
     R13: SP
     R14: LR
     R15: PC
     R16: CPSR
-    
+
+【指令集】
+http://blog.csdn.net/pz0605/article/details/52458762
+MRS R0，CPSR   @传送CPSR 的内容到R0  
+MSR CPSR_c，R0 @传送R0 的内容到CPSR，但仅仅修改CPSR中的控制位域  
+
+STMFD R13!，{R0，R4-R12，LR} @将寄存器列表中的寄存器(R0，R4-R12，LR)存入堆栈。  
+LDMFD R13!，{R0，R4-R12，PC} @将堆栈内容恢复到寄存器(R0，R4-R12，PC)。
+
 direction:
 【A】     <-------
 LDR{条件} 目的寄存器，<存储器地址>
 stmdb
+MOV  LR，PC 
+MRS
+MSR
 
 【B】     ------->
 STR{条件} 源寄存器，<存储器地址>
@@ -23,3 +34,4 @@ ldmia
 stmdb和ldmia指令一般配对使用，stmdb用于将寄存器压栈，ldmia用于将寄存器弹出栈
 stmdb sp!,{r0-r12,lr}  
 含义：sp = sp - 4，先压lr，sp = lr（即将lr中的内容放入sp所指的内存地址）。sp = sp - 4，再压r12
+
